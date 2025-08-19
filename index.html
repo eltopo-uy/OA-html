@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OA: HTML Horror en el Código </title>
+    
+    <!-- Google Fonts para una tipografía temática -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Enlace a la hoja de estilos CSS externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        
+         <header>
+            <h1 class="title">HTML Horror en el Código</h1>
+            <p class="subtitle">Un código web ha sido corrompido. Tu objetivo: reparar las etiquetas HTML para restaurar el sistema.</p>
+        </header>
+
+        <!-- Barra de Progreso -->
+        <div class="progress-section">
+            <label for="progress-bar">Progreso de Restauración:</label>
+            <progress id="progress-bar" value="0" max="100"></progress>
+        </div>
+
+        <!-- Contenedor de la Misión Actual -->
+        <div id="mission-container" class="mission-box">
+            <h2 id="mission-title"></h2>
+            <p id="mission-description"></p>
+            
+            <!-- Código Roto a Reparar -->
+            <div class="broken-code-box">
+                <code>&lt;!-- CÓDIGO DAÑADO --&gt;</code><br>
+                <code id="broken-code"></code>
+            </div>
+            
+            <!-- Input del Usuario -->
+            <div class="input-section">
+                <label for="user-input">Introduce el código reparado:</label>
+                <input type="text" id="user-input" placeholder="<etiqueta>...</etiqueta>">
+            </div>
+
+            <button id="check-button">Verificar Código</button>
+            
+            <!-- Mensajes de Feedback -->
+            <p id="feedback-message"></p>
+        </div>
+
+        <!-- Medallas Obtenidas -->
+        <div class="badges-section">
+            <h3>Medallas Desbloqueadas</h3>
+            <div id="badges-container">
+                <p class="no-badges-text">Aún no has ganado medallas. ¡Completa las misiones!</p>
+            </div>
+        </div>
+        
+         <footer>
+            <p>Creado por A Franchi. Licenciado bajo Creative Commons CC BY-SA 4.0.</p>
+        </footer>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
