@@ -1,4 +1,4 @@
-// -- base de datos de las misiones--
+// --base de datos de las misiones--
 const missions = [
     {
         id: 1,
@@ -21,9 +21,9 @@ const missions = [
     {
         id: 3,
         title: "Misión 3: La imagen perdida",
-        description: "Para mostrar una imagen, se usa la etiqueta img con el atributo src. ¡Inserta la imagen del cohete!",
+        description: "Para mostrar una imagen, se usa la etiqueta img con el atributo src. Inserta la imagen",
         brokenCode: '... imagen.png ...',
-        correctAnswer: [ // <-- Ahora es un array de strings
+        correctAnswer: [ // <-- un array de strings
     '<img src="imagen.png">',
     '<img src="imagen.png"/>',
     "<img src='imagen.png'>",
@@ -44,11 +44,11 @@ const missions = [
     }
 ];
 
-// --- ESTADO DEL JUEGO ---
+// -- ESTADO DEL JUEGO --
 let currentMissionIndex = 0;
 let completedMissions = 0;
 
-// --- ELEMENTOS DEL DOM ---
+// -- ELEMENTOS DEL DOM --
 const missionTitleEl = document.getElementById('mission-title');
 const missionDescriptionEl = document.getElementById('mission-description');
 const brokenCodeEl = document.getElementById('broken-code');
@@ -75,7 +75,7 @@ function loadMission(index) {
 }
 
 /**
- * Verifica la respuesta del usuario.
+ * verifica la respuesta del usuario.
  */
 function checkAnswer() {
     const mission = missions[currentMissionIndex];
@@ -99,7 +99,7 @@ function checkAnswer() {
  */
 function handleCorrectAnswer(mission) {
     feedbackMessageEl.textContent = "¡Código correcto! Sistema restaurado.";
-    feedbackMessageEl.style.color = '#34D399'; // Verde
+    feedbackMessageEl.style.color = '#34D399'; // verde
     mission.isCompleted = true;
     completedMissions++;
     
@@ -114,8 +114,8 @@ function handleCorrectAnswer(mission) {
         currentMissionIndex++;
         if (currentMissionIndex < missions.length) {
             loadMission(currentMissionIndex);
-            feedbackMessageEl.textContent = ''; // Limpiar mensaje
-            checkButton.disabled = false; // Rehabilitar botón
+            feedbackMessageEl.textContent = ''; // limpiar mensaje
+            checkButton.disabled = false; // rehabilitar botón
         } else {
             showFinalMessage();
         }
@@ -127,12 +127,12 @@ function handleCorrectAnswer(mission) {
  */
 function handleIncorrectAnswer() {
     feedbackMessageEl.textContent = "Error en el código. Revisa la sintaxis e inténtalo de nuevo.";
-    feedbackMessageEl.style.color = '#F87171'; // Rojo
-    userInputEl.classList.add('shake'); // Añadir animación
+    feedbackMessageEl.style.color = '#F87171'; // rojo
+    userInputEl.classList.add('shake'); // añadir animación
 }
 
 /**
- * Actualiza la barra de progreso.
+ * actualiza la barra de progreso.
  */
 function updateProgressBar() {
     const progress = (completedMissions / missions.length) * 100;
@@ -140,7 +140,7 @@ function updateProgressBar() {
 }
 
 /**
- * Agrega una medalla a la sección de medallas.
+ * agrega una medalla a la sección de medallas.
  * @param {string} badgeText - el texto de la medalla a añadir.
  */
 function addBadge(badgeText) {
