@@ -1,8 +1,8 @@
-// --- BASE DE DATOS DE MISIONES ---
+// -- base de datos de las misiones--
 const missions = [
     {
         id: 1,
-        title: "Misión 1: El Título Principal",
+        title: "Misión 1: El título principal",
         description: "El título más importante de una página se define con la etiqueta h1. ¡Restaura el título principal!",
         brokenCode: '... El Planeta Digital ...',
         correctAnswer: '<h1>El Planeta Digital</h1>',
@@ -11,25 +11,31 @@ const missions = [
     },
     {
         id: 2,
-        title: "Misión 2: El Párrafo Informativo",
+        title: "Misión 2: El párrafo informativo",
         description: "Los párrafos de texto se encierran en etiquetas p. Arregla este párrafo para que se muestre correctamente.",
-        brokenCode: '... HTML es el esqueleto de la web. ...',
-        correctAnswer: '<p>HTML es el esqueleto de la web.</p>',
+        brokenCode: '... HTML es el esqueleto de la web ...',
+        correctAnswer: '<p>HTML es el esqueleto de la web</p>',
         badge: '✍️ Arquitecto Textual',
         isCompleted: false
     },
     {
         id: 3,
-        title: "Misión 3: La Imagen Perdida",
+        title: "Misión 3: La imagen perdida",
         description: "Para mostrar una imagen, se usa la etiqueta img con el atributo src. ¡Inserta la imagen del cohete!",
-        brokenCode: '... imagen de un cohete ...',
-        correctAnswer: '<img src="rocket.png">',
+        brokenCode: '... imagen.png ...',
+        correctAnswer: [ // <-- Ahora es un array de strings
+    '<img src="imagen.png">',
+    '<img src="imagen.png"/>',
+    "<img src='imagen.png'>",
+    '<img src="imagen.png" alt="cohete">',
+    '<img alt="imagen" src="imagen.png">'
+  ],
         badge: '🖼️ Curador Visual',
         isCompleted: false
     },
      {
         id: 4,
-        title: "Misión 4: El Enlace Roto",
+        title: "Misión 4: El enlace roto",
         description: "Los enlaces o hipervínculos se crean con la etiqueta a y el atributo href. Repara el enlace a la base de datos.",
         brokenCode: '... Ir a la Base de Datos ...',
         correctAnswer: '<a href="#">Ir a la Base de Datos</a>',
@@ -53,19 +59,19 @@ const progressBar = document.getElementById('progress-bar');
 const badgesContainer = document.getElementById('badges-container');
 const missionContainer = document.getElementById('mission-container');
 
-// --- LÓGICA DEL JUEGO ---
+// -- lógica del juego--
 
 /**
- * Carga una misión en la interfaz de usuario.
- * @param {number} index - El índice de la misión a cargar.
+ * crga una misión en la interfaz de usuario.
+ * @param {number} index - el índice de la misión a cargar.
  */
 function loadMission(index) {
     const mission = missions[index];
     missionTitleEl.textContent = mission.title;
     missionDescriptionEl.textContent = mission.description;
     brokenCodeEl.textContent = mission.brokenCode;
-    userInputEl.value = ''; // Limpiar input
-    userInputEl.focus(); // Poner el foco en el input
+    userInputEl.value = ''; // limpiar input
+    userInputEl.focus(); // poner el foco en el input
 }
 
 /**
@@ -73,11 +79,11 @@ function loadMission(index) {
  */
 function checkAnswer() {
     const mission = missions[currentMissionIndex];
-    // Limpiar y normalizar la respuesta del usuario y la correcta
+    // limpiar y normalizar la respuesta del usuario y la correcta
     const userAnswer = userInputEl.value.trim();
     const correctAnswer = mission.correctAnswer;
 
-    // Remover la animación de shake si existe
+    // quitar la animación de shake si existe
     userInputEl.classList.remove('shake');
     
     if (userAnswer === correctAnswer) {
@@ -88,8 +94,8 @@ function checkAnswer() {
 }
 
 /**
- * Maneja la lógica cuando la respuesta es correcta.
- * @param {object} mission - La misión que fue completada.
+ * maneja la lógica cuando la respuesta es correcta.
+ * @param {object} mission - la misión que fue completada
  */
 function handleCorrectAnswer(mission) {
     feedbackMessageEl.textContent = "¡Código correcto! Sistema restaurado.";
@@ -100,10 +106,10 @@ function handleCorrectAnswer(mission) {
     updateProgressBar();
     addBadge(mission.badge);
 
-    // Deshabilitar el botón para evitar envíos múltiples
+    // deshabilitar el botón para evitar envíos múltiples
     checkButton.disabled = true;
 
-    // Esperar un momento antes de pasar a la siguiente misión
+    // esperar un momento antes de pasar a la siguiente misión
     setTimeout(() => {
         currentMissionIndex++;
         if (currentMissionIndex < missions.length) {
@@ -117,7 +123,7 @@ function handleCorrectAnswer(mission) {
 }
 
 /**
- * Maneja la lógica cuando la respuesta es incorrecta.
+ * maneja la lógica cuando la respuesta es incorrecta.
  */
 function handleIncorrectAnswer() {
     feedbackMessageEl.textContent = "Error en el código. Revisa la sintaxis e inténtalo de nuevo.";
@@ -134,15 +140,15 @@ function updateProgressBar() {
 }
 
 /**
- * Añade una medalla a la sección de medallas.
- * @param {string} badgeText - El texto de la medalla a añadir.
+ * Agrega una medalla a la sección de medallas.
+ * @param {string} badgeText - el texto de la medalla a añadir.
  */
 function addBadge(badgeText) {
     if (completedMissions === 1) {
-        badgesContainer.innerHTML = ''; // Limpiar el mensaje inicial
+        badgesContainer.innerHTML = ''; // limpiar el mensaje inicial
     }
     const badgeEl = document.createElement('span');
-    badgeEl.className = 'badge'; // Usaremos una clase para estilizarla en CSS
+    badgeEl.className = 'badge'; // uso una clase para estilizarla en CSS
     badgeEl.style.backgroundColor = '#064E3B';
     badgeEl.style.color = '#A7F3D0';
     badgeEl.style.fontSize = '0.875rem';
@@ -155,29 +161,29 @@ function addBadge(badgeText) {
 }
 
 /**
- * Muestra el mensaje final cuando todas las misiones están completas.
+ * muestra el mensaje final cuando todas las misiones están completas.
  */
 function showFinalMessage() {
     missionContainer.innerHTML = `
         <div style="text-align: center;">
             <h2 style="font-size: 1.875rem; font-weight: 700; color: #6EE7B7; margin-bottom: 1rem;">¡Misión Cumplida, Agente!</h2>
-            <p style="color: #D1D5DB; font-size: 1.125rem;">Has restaurado con éxito todos los sistemas. El código web es estable gracias a ti.</p>
+            <p style="color: #D1D5DB; font-size: 1.125rem;">Has restaurado con éxito todos los sistemas. El código web es estable gracias a vos.</p>
             <p style="font-size: 3rem; margin-top: 1.5rem;">🎉</p>
         </div>
     `;
 }
 
-// --- INICIALIZACIÓN ---
+// --- inicialización ---
 
-// Cargar la primera misión al iniciar la página
+// cargar la primera misión al iniciar la página
 document.addEventListener('DOMContentLoaded', () => {
     loadMission(currentMissionIndex);
 });
 
-// Añadir event listener al botón
+// agregar event listener al botón
 checkButton.addEventListener('click', checkAnswer);
 
-// Permitir enviar con la tecla Enter
+// permitir enviar con la tecla Enter
 userInputEl.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
         checkAnswer();
